@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaFileExcel, FaUsers, FaHashtag, FaClock } from 'react-icons/fa';
 import axios from 'axios';
+import { fetchDashboardStats } from '../services/api';
 
 export default function StatsCards() {
   const [stats, setStats] = useState(null); 
@@ -9,10 +10,8 @@ export default function StatsCards() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const token = localStorage.getItem('authToken');
-        const res = await axios.get('http://localhost:5000/api/admin/stats', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        // const token = localStorage.getItem('authToken');
+        const res =  await fetchDashboardStats();
         console.log("Dashboard stats fetched successfully:", res.data);
         setStats(res.data);
       } catch (err) {

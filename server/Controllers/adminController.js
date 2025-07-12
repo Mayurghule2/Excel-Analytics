@@ -184,10 +184,53 @@ exports.getUploadStats = async (req, res) => {
       label: item._id,
       uploads: item.count
     }));
+    console.log('Upload stats generated:', response);
 
     res.status(200).json(response);
   } catch (err) {
     console.error('Error generating upload stats:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+exports.getUploadInsights = async (req, res) => {
+  try {
+    const totalUploads = await UploadHistory.countDocuments();
+
+    const processed = await UploadHistory.countDocuments({ status: 'processed' });
+    const pending = await UploadHistory.countDocuments({ status: 'pending' });
+    const failed = await UploadHistory.countDocuments({ status: 'failed' });
+    const largeUploads = await UploadHistory.countDocuments({ file_size: { $gt: 100 * 1024 * 1024 } }); // >100MB
+
+    const rowCountAgg = await UploadHistory.aggregate([
+      { $group: { _id: null, totalRows: { $sum: "$row_count" } } }
+    ]);
+    const totalRows = rowCountAgg[0]?.totalRows || 0;
+
+    const latestUpload = await UploadHistory.findOne().sort({ upload_date: -1 });
+
+    const percent = (count) => totalUploads > 0 ? Math.round((count / totalUploads) * 100) : 0;
+
+    const insights = {
+      progressBars: [
+        { title: 'Processed Files', percent: percent(processed), color: 'bg-blue-500' },
+        { title: 'Pending Uploads', percent: percent(pending), color: 'bg-yellow-500' },
+        { title: 'Failed Uploads', percent: percent(failed), color: 'bg-red-500' },
+        { title: 'Large Files >100MB', percent: percent(largeUploads), color: 'bg-purple-500' }
+      ],
+      totalUploads,
+      totalRowsProcessed: totalRows,
+      latestUpload: latestUpload ? {
+        file_name: latestUpload.file_name,
+        upload_date: latestUpload.upload_date,
+        status: latestUpload.status,
+        sizeMB: ((latestUpload.file_size || 0) / (1024 * 1024)).toFixed(2)
+      } : null
+    };
+
+    res.status(200).json(insights);
+  } catch (err) {
+    console.error('Error fetching upload insights:', err);
     res.status(500).json({ message: 'Server error' });
   }
 };

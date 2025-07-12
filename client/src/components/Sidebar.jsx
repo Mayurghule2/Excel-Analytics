@@ -48,7 +48,7 @@ const Sidebar = () => {
           <div className="text-gray-500 text-xs mb-2 uppercase">Main Navigation</div>
           <ul className="space-y-2 text-sm text-gray-700">
 
-            <Link to="/dashboard">
+            <Link to="/admin/dashboard">
             <div className='flex items-center gap-3 px-2 py-2  hover:bg-gray-100 hover:rounded'>
               <p className='text-lg'> <MdDashboardCustomize /></p>
               <p className='text-base'> Dashboard</p>
@@ -60,7 +60,7 @@ const Sidebar = () => {
               <p className='text-base'> User Details</p>
             </div>
             </Link>
-            <Link to="/dashboard">
+            <Link to="/admin/upload-history">
             <div className='flex items-center gap-3 px-2 py-2  hover:bg-gray-100 hover:rounded'>
               <p className='text-lg'> <ImUpload /></p>
               <p className='text-base'>Total Uploads</p>

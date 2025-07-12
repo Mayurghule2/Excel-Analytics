@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { sendContactMessage } from '../services/api';
 const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -18,28 +18,18 @@ const ContactUs = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch("http://localhost:3000/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await res.json();
-      if (res.ok) {
-        setStatusMessage("✅ Message sent successfully!");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        setStatusMessage(`❌ ${data.error || "Something went wrong"}`);
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setStatusMessage("❌ Server error. Please try again later.");
-    }
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await sendContactMessage(formData);
+    setStatusMessage("✅ Message sent successfully!");
+    alert("✅ Message sent successfully!");
+    setFormData({ name: "", email: "", subject: "", message: "" });
+  } catch (err) {
+    console.error("Contact error:", err.message);
+    setStatusMessage("❌ " + err.message);
+  }
+};
 
   return (
     <div className="mb-8 mt-8">

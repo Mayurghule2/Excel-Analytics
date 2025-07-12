@@ -31,5 +31,7 @@ router.get('/error-logs/download', protect, adminOnly, adminController.downloadE
 // admin dashboard
 router.get('/stats',protect, adminOnly,  adminController.getDashboardStats);
 router.get('/uploads/graph/:type', protect, adminOnly, adminController.getUploadStats);
+router.get('/uploads/insights', protect, adminOnly, adminController.getUploadInsights);
+
 
 module.exports = router;

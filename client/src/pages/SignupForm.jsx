@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { registerUser } from '../services/api';
 const SignupForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -29,10 +29,7 @@ const SignupForm = () => {
     setError("");
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        formData
-      );
+      const response = await registerUser(formData);
       console.log("✅ FormData sent to backend:", formData);
       console.log("✅ Backend response:", response);
 

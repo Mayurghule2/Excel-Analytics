@@ -9,6 +9,8 @@ import LandingPage from './components/LandingPage'
 import ContactUs
  from './pages/ContactUs'
 import AdminDashboard from './pages/AdminDashboard';
+import AdminUploadHistory from './pages/AdminUploadHistory';
+import AdminLayout from './components/AdminLayout';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -27,7 +29,12 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/sign-in" element={<SignInForm />} />
         <Route path="/upload-excel" element={<UploadExcel/>} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        {userRole === 'admin' && (
+          <Route element={<AdminLayout />}>
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/upload-history" element={<AdminUploadHistory />} />
+          </Route>
+        )}
 
       </Routes>
       {console.log("userRole:", userRole)}

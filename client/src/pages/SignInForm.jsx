@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SignupForm from "./SignupForm";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import { loginUser } from '../services/api';
 const SignInForm = () => {
   const [formType, setFormType] = useState("signin");
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -18,10 +18,7 @@ const SignInForm = () => {
     e.preventDefault();
     setError("");
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
-         email: formData.email,
-      password: formData.password,
-      });
+       const res = await loginUser({ email: formData.email, password: formData.password });
 
       const { token, role, user } = res.data;
 
