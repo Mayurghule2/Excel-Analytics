@@ -1,6 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { sendOtp, verifyOtp, resetPassword } from "../services/api";
+
 const ForgetPassword = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -29,9 +30,7 @@ const ForgetPassword = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/auth/send-otp", {
-        email: formData.email,
-      });
+      await sendOtp(formData.email);
       console.log("OTP sent to:", formData.email);
       setOtpSent(true);
       alert("OTP sent to your email successfully!");
@@ -43,13 +42,7 @@ const ForgetPassword = () => {
 
   const handleVerifyOtp = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/verify-otp",
-        {
-          email: formData.email,
-          otp: otpInput,
-        }
-      );
+      const response = await verifyOtp(formData.email, otpInput);
       console.log(response.data.message);
       setOtpVerified(true);
       alert("OTP Verified!");
@@ -61,26 +54,24 @@ const ForgetPassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!otpVerified) {
       alert("Please verify OTP before submitting.");
       return;
     }
-      if (formData.newPwd.length < 8 && formData.confirmPwd.length < 8) {
-    setError("Password must be at least 8 characters long.");
-    return;
-  }
+
+    if (formData.newPwd.length < 8 || formData.confirmPwd.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
+
     if (formData.newPwd !== formData.confirmPwd) {
       alert("Passwords do not match.");
       return;
     }
+
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/reset-password",
-        {
-          email: formData.email,
-          newPassword: formData.newPwd, // ✅ Correct field
-        }
-      );
+      const response = await resetPassword(formData.email, formData.newPwd);
       console.log("Password reset response:", response.data);
       alert("Password has been reset successfully!");
       navigate("/sign-in");
@@ -110,12 +101,13 @@ const ForgetPassword = () => {
             onChange={handleChange}
             required
           />
+
           {/* Send OTP Button */}
           {!otpSent ? (
             <button
               type="button"
               onClick={handleSendOtp}
-              className="mt-6 w-full bg-gradient-to-r from-[#030d46] to-[#06eaea] text-white py-2 px-4  hover:opacity-50 transition duration-300 rounded-2xl"
+              className="mt-6 w-full bg-gradient-to-r from-[#030d46] to-[#06eaea] text-white py-2 px-4 hover:opacity-50 transition duration-300 rounded-2xl"
             >
               Send OTP
             </button>
@@ -139,7 +131,7 @@ const ForgetPassword = () => {
               <button
                 type="button"
                 onClick={handleVerifyOtp}
-                className="mt-6 w-full bg-gradient-to-r from-[#030d46] to-[#06eaea] text-white py-2 px-4  hover:opacity-50 transition duration-300 rounded-2xl"
+                className="mt-6 w-full bg-gradient-to-r from-[#030d46] to-[#06eaea] text-white py-2 px-4 hover:opacity-50 transition duration-300 rounded-2xl"
               >
                 Verify OTP
               </button>
@@ -158,7 +150,7 @@ const ForgetPassword = () => {
                 className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={formData.newPwd}
                 onChange={handleChange}
-                 minLength={8}
+                minLength={8}
                 required
               />
 
@@ -171,7 +163,7 @@ const ForgetPassword = () => {
                 className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={formData.confirmPwd}
                 onChange={handleChange}
-                 minLength={8}
+                minLength={8}
                 required
               />
 

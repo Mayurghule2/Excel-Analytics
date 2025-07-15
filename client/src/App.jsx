@@ -30,7 +30,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/sign-in" element={<SignInForm />} />
-        <Route path="/forget-pwd" element={<ForgetPassword />} />
+        <Route path="/ForgetPwd" element={<ForgetPassword />} />
         <Route path="/sign-up" element={<SignupForm />} />
         <Route path="/upload-excel" element={<UploadExcel/>}/>
         {userRole === 'admin' && (
