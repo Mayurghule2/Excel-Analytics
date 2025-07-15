@@ -102,7 +102,7 @@ const ForgetPassword = () => {
             required
           />
 
-          {/* Send OTP Button */}
+        
           {!otpSent ? (
             <button
               type="button"
@@ -138,7 +138,7 @@ const ForgetPassword = () => {
             </>
           )}
 
-          {/* Password Fields */}
+    
           {otpVerified && (
             <>
               <label className="block text-sm font-medium text-gray-700 mb-1">
