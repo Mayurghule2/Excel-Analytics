@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SignupForm from "./SignupForm";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { loginUser } from '../services/api';
 const SignInForm = () => {
   const [formType, setFormType] = useState("signin");
@@ -43,9 +42,9 @@ const SignInForm = () => {
     }
   };
 
-  return (
-    <div className="bg-white min-h-screen flex justify-center items-center p-8">
-      <div className="bg-white border border-black rounded-xl p-6 w-full max-w-md shadow-lg">
+ return (
+    <div className="bg-gradient-to-b from-blue-50 to-white pt-20 min-h-screen flex justify-center items-center p-8  ">
+      <div className="bg-white border border-black rounded-xl p-6 w-full max-w-md shadow-lg shadow-gray-800">
         <div className="text-center mb-4">
           <h2 className="text-2xl font-semibold">
             {formType === "signin" ? "Sign In" : "Sign Up"}
@@ -96,12 +95,23 @@ const SignInForm = () => {
               className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            <button
+           <button
               type="submit"
               className="mt-4 bg-gradient-to-r from-[#030d46] to-[#06eaea] text-white py-2 rounded-full hover:opacity-90 transition"
             >
               Sign In
             </button>
+            <a
+              href="/ForgetPwd"
+              className="text-blue-700 font-medium m-0.5 hover:underline hover:text-red-600 text-sm ml-70 "
+            >
+              Forget Password ?
+            </a>
+            <div className="flex items-center my-2">
+              <hr className="flex-grow border-t  border-gray-300" />
+              <span className="mx-4 text-gray-500 font-medium">OR</span>
+              <hr className="flex-grow border-t border-gray-300" />
+            </div>
           </form>
         ) : (
           <SignupForm onSwitch={setFormType} />
