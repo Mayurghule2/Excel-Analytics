@@ -71,3 +71,13 @@ export const sendContactMessage = async (formData) => {
   }
 };
 
+export const fetchContactMessages = () =>
+  api.get('/admin/contact', {
+    requiresAuth: true,
+  });
+
+// GET chart data by uploadId
+export const getChartDataById = (uploadId) =>
+  api.get(`/uploads/${uploadId}/chart-data`, {
+    requiresAuth: true,
+  });

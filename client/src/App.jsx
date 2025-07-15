@@ -11,6 +11,8 @@ import ContactUs
 import AdminDashboard from './pages/AdminDashboard';
 import AdminUploadHistory from './pages/AdminUploadHistory';
 import AdminLayout from './components/AdminLayout';
+import AdminContact from './pages/AdminContact'
+import ChartView from './components/ChartView';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -29,10 +31,12 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/sign-in" element={<SignInForm />} />
         <Route path="/upload-excel" element={<UploadExcel/>} />
+        <Route path="/charts/:uploadId" element={<ChartView />} />
         {userRole === 'admin' && (
           <Route element={<AdminLayout />}>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/upload-history" element={<AdminUploadHistory />} />
+            <Route path="/admin/messages" element={<AdminContact />} />
           </Route>
         )}
 

@@ -33,5 +33,6 @@ router.get('/stats',protect, adminOnly,  adminController.getDashboardStats);
 router.get('/uploads/graph/:type', protect, adminOnly, adminController.getUploadStats);
 router.get('/uploads/insights', protect, adminOnly, adminController.getUploadInsights);
 
-
+// contact messages
+router.get('/contact', protect, adminOnly, adminController.getAllContactMessages);
 module.exports = router;

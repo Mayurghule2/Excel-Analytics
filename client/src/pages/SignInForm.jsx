@@ -33,7 +33,7 @@ const SignInForm = () => {
       if (role === "admin") {
       navigate("/admin/dashboard");
     } else if (role === "user") {
-      navigate("/user/home");
+      navigate("/user/upload-excel");
     } else {
       setError("Unknown role. Contact administrator.");
     }

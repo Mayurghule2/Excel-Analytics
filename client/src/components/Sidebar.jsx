@@ -66,7 +66,7 @@ const Sidebar = () => {
               <p className='text-base'>Total Uploads</p>
             </div>
             </Link>
-            <Link to="/dashboard">
+            <Link to="/admin/messages">
             <div className='flex items-center gap-3 px-2 py-2  hover:bg-gray-100 hover:rounded'>
               <p className='text-lg'> <LuMessagesSquare /></p>
               <p className='text-base'> Messages </p>
