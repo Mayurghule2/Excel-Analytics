@@ -82,7 +82,7 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div className="bg-white min-h-screen flex justify-center items-center p-8">
+    <div className="bg-gradient-to-b from-blue-50 to-white min-h-screen flex justify-center items-center p-8">
       <div className="bg-white border border-black rounded-xl p-6 w-full max-w-md shadow-lg">
         <div className="text-center mb-4">
           <h2 className="text-2xl font-semibold">Set Password</h2>
