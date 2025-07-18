@@ -32,6 +32,17 @@ export const loginUser = (credentials) =>
 export const registerUser = (data) =>
   api.post('/auth/register', data);
 
+
+// FORGOT PASSWORD FLOW
+export const sendOtp = (email) =>
+  api.post('/auth/send-otp', { email });
+
+export const verifyOtp = (email, otp) =>
+  api.post('/auth/verify-otp', { email, otp });
+
+export const resetPassword = (email, newPassword) =>
+  api.post('/auth/reset-password', { email, newPassword });
+
 // STATS (admin only)
 export const fetchDashboardStats = () =>
   api.get('/admin/stats', {
