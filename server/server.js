@@ -7,6 +7,8 @@
   const adminRoutes = require('./Routes/adminRoutes')
   const contactRoutes = require('./Routes/contactRoute')
   const aiRoutes = require('./Routes/aiRoutes');
+const userRoutes = require('./Routes/userRoutes')
+
   require('dotenv').config();
 
   const app = express();
@@ -28,6 +30,7 @@
   app.use('/api/admin',adminRoutes);
   app.use('/api/contact', contactRoutes);
   app.use('/api/ai', aiRoutes);
+  app.use('/api/users', userRoutes);
 
   
   app.listen(port, () => {

@@ -14,6 +14,27 @@ exports.getAllUsers = async (req, res) => {
   res.json(users);
 };
 
+exports.getUserById = async (req, res) => {
+  if (req.user.role !== 'admin') return res.status(403).json({ message: 'Access denied' });
+
+  try {
+    const user = await User.findById(req.params.id)
+      .select('-password_hash')
+      .populate({
+        path: 'uploads',
+        select: 'file_name upload_date status',
+        options: { sort: { upload_date: -1 } }
+      });
+
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.error("Error fetching user by ID:", err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 exports.toggleUserStatus = async (req, res) => {
   if (req.user.role !== 'admin') return res.status(403).json({ message: 'Access denied' });
 

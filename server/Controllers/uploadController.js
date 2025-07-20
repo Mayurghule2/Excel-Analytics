@@ -15,6 +15,7 @@ exports.uploadFile = async (req, res) => {
       user_id: req.user.id,
       file_name: req.file.originalname,
       file_path: req.file.originalname,
+      file_size: req.file.size,
       parsed_data: rawData, 
       headers,
       rows,
@@ -49,3 +50,43 @@ exports.getChartData = async (req, res) => {
     res.status(500).json({ message: 'Error fetching chart data', error: err.message });
   }
 };
+
+// return the uploaded files
+exports.getAllUploads = async (req, res) => {
+  try {
+    const uploads = await UploadHistory.find().sort({ upload_date: -1 });
+    res.status(200).json(uploads);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch uploads', error: error.message });
+  }
+};
+
+exports.getUploadById = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const uploads = await UploadHistory.find({ user_id: userId }).sort({ createdAt: -1 });
+
+    res.status(200).json({ success: true, uploads });
+  } catch (error) {
+    console.error("Error fetching uploads by user:", error);
+    res.status(500).json({ success: false, message: 'Server Error' });
+  }
+};
+// delete the uploaded file
+exports.deleteUploadById = async (req, res) => {
+  const id = req.params.id;
+   console.log('Received ID to delete:', id);
+  try {
+    const upload = await UploadHistory.findById(id);
+    if (!upload) {
+      return res.status(404).json({ message: 'Upload not found' });
+    }
+
+    await UploadHistory.findByIdAndDelete(id);
+    res.status(200).json({ message: 'Upload deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting upload', error: error.message });
+  }
+};
+

@@ -81,3 +81,32 @@ export const getChartDataById = (uploadId) =>
   api.get(`/uploads/${uploadId}/chart-data`, {
     requiresAuth: true,
   });
+
+  export const getUploadHistory = () => api.get('/uploads/user/uploads',{
+    requiresAuth: true,
+  });
+export const deleteUploadById = (id) => api.delete(`/uploads/${id}`,{
+  requiresAuth: true,
+});
+
+export const fetchAllUsers = () => api.get('/admin/users',{
+  requiresAuth: true,
+});
+
+export const getUserDashboardData = () =>
+  api.get('uploads/dashboard/user',{
+  requiresAuth: true,
+});
+export const getChartsUploadHistory = () =>
+  api.get('uploads/charts-data',{
+  requiresAuth: true,
+});
+export const getUserProfile = (id) =>
+  api.get(`users/${id}`,{
+  requiresAuth: true,
+});
+export const putUserProfile = (id,formData) =>
+  api.put(`users/update/${id}`,formData,{
+  requiresAuth: true,
+});
+

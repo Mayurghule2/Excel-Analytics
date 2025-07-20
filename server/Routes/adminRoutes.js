@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllUsers, getAllUploads } = require('../Controllers/adminController');
+const { getAllUsers, getAllUploads,getUserById } = require('../Controllers/adminController');
 const adminController = require('../Controllers/adminController');
 
 const protect = require('../Middlewares/authMiddlewares');

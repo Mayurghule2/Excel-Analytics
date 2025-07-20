@@ -1,12 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo from '../assets/images/logo.png';
-import Avatar from '../assets/images/avatar.jpg'; 
-const Navbar = ({ onFileUpload, onNavigate, darkMode, toggleDarkMode }) => {
+import Avatar from '../assets/images/avatar.jpg';
+import { Menu, X } from 'lucide-react';
+import { FaUserLarge } from "react-icons/fa6";
+
+const Navbar = ({ onNavigate }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [userRole, setUserRole] = useState(null);
-  const [userName, setUserName] = useState('User'); 
+  const [fullName, setFullName] = useState('User');
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -15,9 +19,11 @@ const Navbar = ({ onFileUpload, onNavigate, darkMode, toggleDarkMode }) => {
     const updateLoginState = () => {
       const token = localStorage.getItem('authToken');
       const role = localStorage.getItem('userRole');
+      const fullName = `${localStorage.getItem('firstName') || ''} ${localStorage.getItem('lastName') || ''}`.trim();
+
       setIsLoggedIn(!!token && role === 'user');
       setUserRole(role);
-      setUserName(localStorage.getItem('userName') || 'User');
+      setFullName(fullName || 'User');
     };
 
     updateLoginState();
@@ -49,28 +55,31 @@ const Navbar = ({ onFileUpload, onNavigate, darkMode, toggleDarkMode }) => {
         : 'bg-white text-black'
       }`}>
       <div className="container mx-auto flex justify-between items-center">
-        
+        {/* Logo */}
         <Link to="/">
           <div className="flex gap-2 items-center">
-            <img className="w-16 h-16" src={Logo} alt="logo" />
-            <h1 className={`text-2xl font-bold ${isLoggedIn ? 'text-blue-300' : 'text-blue-700'
-              }`}>
-              EXCEL
-            </h1>
+            <img className="w-14 h-14" src={Logo} alt="logo" />
+            <h1 className={`text-2xl font-bold ${isLoggedIn ? 'text-blue-300' : 'text-blue-700'}`}>EXCEL</h1>
             <h1 className="text-2xl font-bold text-[#06eaea]">ANALYTICS</h1>
           </div>
         </Link>
 
-        
-        <div className="flex items-center gap-4 
-        ">
-    
+        {/* Mobile toggle */}
+        <button
+          className="md:hidden text-2xl"
+          onClick={() => setShowMobileMenu(!showMobileMenu)}
+        >
+          {showMobileMenu ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Nav Links */}
+        <nav className={`flex-col md:flex-row md:flex items-center gap-6 absolute md:static bg-[#030d46] md:bg-transparent shadow-md md:shadow-none w-full md:w-auto top-16 left-0 z-50 p-6 md:p-0 transition-all duration-300 ease-in-out ${showMobileMenu ? 'flex' : 'hidden'}`}>
           {!isLoggedIn && (
             <>
-              <Link to="/" className="hidden md:block hover:text-blue-600 font-semibold ">Home</Link>
-              <a href="#about-us" className="hidden md:block hover:text-blue-600 font-semibold" onClick={(e)=>{e.preventDefault(); document.getElementById("about-us").scrollIntoView({behavior:"smooth"});}}>About Us</a>
-              <a href="#services" className="hidden md:block hover:text-blue-600 font-semibold " onClick={(e)=>{e.preventDefault(); document.getElementById("services").scrollIntoView({behavior:"smooth"});}}>Services</a>
-              <Link to="/contact" className="hidden md:block hover:text-blue-600 font-semibold">Contact Us</Link>
+              <Link to="/" className="hover:text-blue-600 font-semibold">Home</Link>
+              <a href="#about-us" className="hover:text-blue-600 font-semibold" onClick={(e) => { e.preventDefault(); document.getElementById("about-us").scrollIntoView({ behavior: "smooth" }); }}>About Us</a>
+              <a href="#services" className="hover:text-blue-600 font-semibold" onClick={(e) => { e.preventDefault(); document.getElementById("services").scrollIntoView({ behavior: "smooth" }); }}>Services</a>
+              <Link to="/contact" className="hover:text-blue-600 font-semibold">Contact Us</Link>
               <Link to="/sign-in">
                 <button className="bg-gradient-to-r from-[#030d46] to-[#06eaea] px-5 py-2 text-white rounded-full font-semibold hover:opacity-70">
                   Sign In
@@ -81,48 +90,43 @@ const Navbar = ({ onFileUpload, onNavigate, darkMode, toggleDarkMode }) => {
 
           {isLoggedIn && (
             <>
-              <button onClick={() => navigate("/upload-excel")} className="group relative font-semibold text-white "> Upload Excel
+              <button onClick={() => navigate("/upload-excel")} className="font-semibold  group relative ">Upload Excel
+                 <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
+              </button>
+              <button onClick={() => navigate("/user-dashboard")} className="font-semibold group relative">Dashboard
                 <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
               </button>
-              <button onClick={() => navigate('/dashboard')} className="group relative font-semibold text-white ">Dashboard
+              <button onClick={() => navigate("/analytics")} className="font-semibold group relative">Charts
                 <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
               </button>
-              <button onClick={() => navigate('/analytics')} className="group relative font-semibold text-white ">Charts
-                <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
-              </button>
-              <button onClick={() => navigate('/history')} className="group relative font-semibold text-white ">Upload History
+              <button onClick={() => navigate("/history")} className="font-semibold group relative">Upload History
                 <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
               </button>
 
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setShowDropdown(!showDropdown)}
-                  className="flex items-center gap-1 group relative font-semibold text-white "
-                >
-                  👤 ▾
+              <div className="relative group" ref={dropdownRef}>
+                <button onClick={() => setShowDropdown(!showDropdown)} className="flex items-center font-semibold gap-1 ">
+                  <FaUserLarge className='w-4 h-4 md:w-5 md:h-5' /> ▾
                   <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
                 </button>
+
                 {showDropdown && (
-                  <div className="absolute right-0 mt-3 w-52 bg-white text-black rounded shadow-lg z-50 dark:bg-gray-900 dark:text-white overflow-hidden">
+                  <div className="absolute right-0 mt-3 w-52 bg-white text-black rounded shadow-lg z-50">
                     <div className="flex flex-col items-center border-b p-4">
                       <img src={Avatar} alt="avatar" className="w-16 h-16 rounded-full mb-2 object-cover" />
-
-                      <span className="text-sm font-semibold">{userName}</span>
+                      <span className="text-sm font-semibold">{fullName}</span>
                     </div>
-                    <button onClick={() => { onNavigate('/profile'); setShowDropdown(false); }} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800">Profile</button>
-                    <button onClick={() => alert('Settings clicked')} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800">Settings</button>
-                    <button onClick={() => alert('Account clicked')} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-blue-600 dark:text-blue-400">
+                    <button onClick={() => { navigate('/profile'); setShowDropdown(false); }} className="w-full text-left px-4 py-2 hover:bg-gray-100">Profile</button>
+                    {/* <button onClick={() => alert('Settings clicked')} className="w-full text-left px-4 py-2 hover:bg-gray-100">Settings</button>
+                    <button onClick={() => alert('Account clicked')} className="w-full text-left px-4 py-2 hover:bg-gray-100 text-blue-600">
                       Account <span className="text-xs font-bold ml-1">NEW!</span>
-                    </button>
-                    <button onClick={handleLogout} className="w-full text-left px-4 py-2 hover:bg-red-100 dark:hover:bg-red-800 text-red-600 dark:text-red-400">Log Out</button>
+                    </button> */}
+                    <button onClick={handleLogout} className="w-full text-left px-4 py-2 hover:bg-red-100 text-red-600">Log Out</button>
                   </div>
                 )}
               </div>
             </>
           )}
-
-
-        </div>
+        </nav>
       </div>
     </header>
   );

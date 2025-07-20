@@ -41,7 +41,7 @@ const AdminContact = () => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto ">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">📩 Contact Messages</h2>
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6"> Contact Messages</h2>
 
       {messages.length === 0 ? (
         <p className="text-gray-500">No messages found.</p>
@@ -50,24 +50,24 @@ const AdminContact = () => {
           {messages.map((msg) => (
             <div
               key={msg._id}
-              className="rounded-2xl shadow-lg bg-white border border-gray-100 hover:shadow-xl transition-all duration-300 p-5 hover:scale-105"
+              className=" shadow-lg bg-white border border-gray-100 hover:shadow-xl transition-all duration-300 p-5 hover:scale-105"
             >
-              <div className="flex items-center gap-3 mb-2">
-                <User className="text-blue-500" size={20} />
-                <h4 className="font-semibold text-lg text-gray-700">{msg.name}</h4>
+              <div className="flex items-center gap-3 mb-4 ml-2">
+                <User className="text-blue-500" size={30} />
+                <h4 className="font-semibold text-xl text-gray-700">{msg.name}</h4>
               </div>
 
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex items-center gap-3 mb-2 ml-3">
                 <Mail className="text-green-500" size={18} />
                 <p className="text-sm text-gray-600">{msg.email}</p>
               </div>
 
-              <div className="mb-2 flex  gap-2 items-center">
-                <span className="text-sm text-gray-400">Subject:</span>
+              <div className="mb-2 flex  gap-2 items-center ml-3">
+                <span className="text-base text-gray-400">Subject:</span>
                 <p className="text-gray-700 font-medium">{msg.subject}</p>
               </div>
 
-              <div className="flex items-start gap-2 mt-3">
+              <div className="flex items-start gap-2 mt-3 ml-3">
                   <div className="mt-1 shrink-0">
     <MessageCircle className="text-purple-500" size={18} />
   </div>

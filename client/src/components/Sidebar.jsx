@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link,useNavigate } from 'react-router-dom';
-import Avatar from "../assets/images/avatar.jpg"; 
+
 import { FaSignOutAlt} from 'react-icons/fa';
 import { MdDashboardCustomize } from "react-icons/md";
 import { PiUserListFill } from "react-icons/pi";
 import { ImUpload } from "react-icons/im";
 import { LuMessagesSquare } from "react-icons/lu";
-
+import { RiAdminFill } from "react-icons/ri";
 const Sidebar = () => {
    const navigate = useNavigate();
 
@@ -31,12 +31,11 @@ const Sidebar = () => {
      
       <div>
         <div className="bg-gradient-to-r from-[#030d46] to-[#06eaea] text-white p-4 mb-6 pt-8 pb-8">
-          <div className="flex items-center gap-4">
-            <img
-              src={Avatar} 
-              alt="User"
-              className="w-12 h-12 rounded-full border-2 border-white"
-            />
+          <div className="flex items-center gap-2">
+            <div className='p-1 bg-white rounded-full'>
+
+            <RiAdminFill className="w-12 h-12 rounded-full bg-gradient-to-r from-[#030d46] to-[#06eaea] p-2"/>
+            </div>
             <div>
               <div className="font-semibold">{fullName}</div>
               <div className="text-sm text-gray-100">{email}</div>
@@ -54,8 +53,8 @@ const Sidebar = () => {
               <p className='text-base'> Dashboard</p>
             </div>
             </Link>
-            <Link to="/user-details">
-            <div className='flex items-center gap-3 px-2 py-2  hover:bg-gray-100 hover:rounded'>
+            <Link to="/admin/users">
+            <div className='flex items-center gap-3 px-2 py-2  hover:bg-gray-100 hover:rounded'            >
               <p className='text-lg'> <PiUserListFill /></p>
               <p className='text-base'> User Details</p>
             </div>
