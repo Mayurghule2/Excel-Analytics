@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const UploadHistory = require('../models/UploadHistory');
+const Contact = require('../models/Contact');
 const { Parser } = require('json2csv');
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
@@ -232,5 +233,17 @@ exports.getUploadInsights = async (req, res) => {
   } catch (err) {
     console.error('Error fetching upload insights:', err);
     res.status(500).json({ message: 'Server error' });
+  }
+};
+
+exports.getAllContactMessages = async (req, res) => {
+  if (req.user.role !== 'admin') return res.status(403).json({ message: 'Access denied' });
+
+  try {
+    const messages = await Contact.find().sort({ createdAt: -1 });
+    res.status(200).json(messages);
+  } catch (err) {
+    console.error('Failed to fetch contact messages:', err);
+    res.status(500).json({ error: 'Failed to fetch messages' });
   }
 };

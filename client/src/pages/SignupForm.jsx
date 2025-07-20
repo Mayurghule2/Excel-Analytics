@@ -47,7 +47,7 @@ const SignupForm = () => {
 
       if (response.status === 201) {
         alert("Signup successful! go to Signin...");
-        navigate("/sign-in");
+        navigate("/signin");
       } else {
         setError("Unexpected response from server.");
       }

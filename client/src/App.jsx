@@ -11,6 +11,8 @@ import ContactUs
 import AdminDashboard from './pages/AdminDashboard';
 import AdminUploadHistory from './pages/AdminUploadHistory';
 import AdminLayout from './components/AdminLayout';
+import AdminContact from './pages/AdminContact'
+import ChartView from './components/ChartView';
 import ForgetPassword from './pages/ForgetPassword';
 import SignupForm from './pages/SignupForm';
 function App() {
@@ -33,10 +35,12 @@ function App() {
         <Route path="/ForgetPwd" element={<ForgetPassword />} />
         <Route path="/sign-up" element={<SignupForm />} />
         <Route path="/upload-excel" element={<UploadExcel/>}/>
+        <Route path="/charts/:uploadId" element={<ChartView />} />
         {userRole === 'admin' && (
           <Route element={<AdminLayout />}>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/upload-history" element={<AdminUploadHistory />} />
+            <Route path="/admin/messages" element={<AdminContact />} />
           </Route>
         )}
 

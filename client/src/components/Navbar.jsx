@@ -39,6 +39,7 @@ const Navbar = ({ onFileUpload, onNavigate, darkMode, toggleDarkMode }) => {
     localStorage.removeItem('authToken');
     window.dispatchEvent(new Event('authChanged'));
     setShowDropdown(false);
+    alert('✅ You have been logged out successfully.');
     navigate('/sign-in');
   };
 
@@ -80,17 +81,26 @@ const Navbar = ({ onFileUpload, onNavigate, darkMode, toggleDarkMode }) => {
 
           {isLoggedIn && (
             <>
-              <button onClick={() => onNavigate('/upload-excel')} className="hover:text-[#00ffff]"> Upload Excel</button>
-              <button onClick={() => onNavigate('/')} className="hover:text-[#00ffff]">Dashboard</button>
-              <button onClick={() => onNavigate('/analytics')} className="hover:text-[#00ffff]">Charts</button>
-              <button onClick={() => onNavigate('/history')} className="hover:text-[#00ffff]">📂Upload History</button>
+              <button onClick={() => navigate("/upload-excel")} className="group relative font-semibold text-white "> Upload Excel
+                <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
+              </button>
+              <button onClick={() => navigate('/dashboard')} className="group relative font-semibold text-white ">Dashboard
+                <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
+              </button>
+              <button onClick={() => navigate('/analytics')} className="group relative font-semibold text-white ">Charts
+                <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
+              </button>
+              <button onClick={() => navigate('/history')} className="group relative font-semibold text-white ">Upload History
+                <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
+              </button>
 
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setShowDropdown(!showDropdown)}
-                  className="flex items-center gap-1 hover:text-[#00ffff]"
+                  className="flex items-center gap-1 group relative font-semibold text-white "
                 >
                   👤 ▾
+                  <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
                 </button>
                 {showDropdown && (
                   <div className="absolute right-0 mt-3 w-52 bg-white text-black rounded shadow-lg z-50 dark:bg-gray-900 dark:text-white overflow-hidden">
