@@ -13,10 +13,15 @@ import AdminUploadHistory from './pages/AdminUploadHistory';
 import AdminLayout from './components/AdminLayout';
 import AdminContact from './pages/AdminContact'
 import ChartView from './components/ChartView';
+
 import UploadHistory from './pages/UploadHistory';
 import UserDetailsPage from './pages/UserDetailsPage';
 import UserDashboard from './pages/UserDashboard';
 import UserProfile from './pages/UserProfile';
+
+import ForgetPassword from './pages/ForgetPassword';
+import SignupForm from './pages/SignupForm';
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -34,7 +39,9 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/sign-in" element={<SignInForm />} />
-        <Route path="/upload-excel" element={<UploadExcel/>} />
+        <Route path="/ForgetPwd" element={<ForgetPassword />} />
+        <Route path="/sign-up" element={<SignupForm />} />
+        <Route path="/upload-excel" element={<UploadExcel/>}/>
         <Route path="/charts/:uploadId" element={<ChartView />} />
         <Route path="/history" element={<UploadHistory />} />
         <Route path="/user-dashboard" element={<UserDashboard />} />

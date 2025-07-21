@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import * as THREE from 'three';
+import GenerateInsights from './GenerateInsights'; // Adjust the path as needed
 import { getChartDataById } from '../services/api';
 import { Bar, Line, Pie } from 'react-chartjs-2';
 import {
@@ -238,6 +239,10 @@ const ChartView = () => {
         className="p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md min-h-[300px] max-w-5xl mx-auto"
       >
         {chartType !== '3d' && renderChart()}
+      </div>
+
+      <div>
+        <GenerateInsights headers={headers} rows={rows} />
       </div>
     </div>
   );

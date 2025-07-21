@@ -15,6 +15,7 @@ const Navbar = ({ onNavigate }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+
   useEffect(() => {
     const updateLoginState = () => {
       const token = localStorage.getItem('authToken');
@@ -48,7 +49,7 @@ const Navbar = ({ onNavigate }) => {
     alert('✅ You have been logged out successfully.');
     navigate('/sign-in');
   };
-
+  
   return (
     <header className={`w-full px-4 py-2 shadow-2xl ${isLoggedIn
         ? 'bg-gradient-to-r from-[#030d46] to-[#06eaea] text-white'

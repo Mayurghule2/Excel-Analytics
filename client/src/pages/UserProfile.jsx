@@ -5,13 +5,7 @@ import Select from 'react-select';
 import { Country, State } from 'country-state-city';
 import { FaUser } from 'react-icons/fa';
 
-const token = localStorage.getItem('token');
 
-let userId = null;
-if (token) {
-  const decoded = jwtDecode(token);
-  userId = decoded?.id; // <-- Extract user ID
-}
 
 const countries = Country.getAllCountries().map((country) => ({
   value: country.isoCode,
@@ -20,6 +14,13 @@ const countries = Country.getAllCountries().map((country) => ({
 
 
 const UserProfile = () => {
+  const token = localStorage.getItem('authToken');
+
+let userId = null;
+if (token) {
+  const decoded = jwtDecode(token);
+  userId = decoded?.id; 
+}
   if (!userId) return;
   const [user, setUser] = useState(null);
   const [states, setStates] = useState([]);
@@ -76,7 +77,7 @@ const UserProfile = () => {
     try {
       await putUserProfile(userId, formData);
       alert("User updated successfully");
-      fetchUser(); // Refresh data
+      fetchUser(); 
     } catch (error) {
       console.error("Update error:", error);
       alert("Failed to update user.");

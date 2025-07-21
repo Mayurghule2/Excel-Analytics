@@ -5,11 +5,30 @@ const axios = require('axios');
 router.post('/generate-insights', async (req, res) => {
   const { tableData } = req.body;
 
+  if (!tableData || !Array.isArray(tableData.headers) || !Array.isArray(tableData.rows)) {
+    return res.status(400).json({ error: "Invalid tableData format. Expecting { headers: [], rows: [[]] }" });
+  }
+
+  const { headers, rows } = tableData;
+
   try {
+    // Convert rows + headers into an array of objects for better readability in the prompt
+    const formattedData = rows.map(row =>
+      headers.reduce((obj, header, idx) => {
+        obj[header] = row[idx];
+        return obj;
+      }, {})
+    );
+
     const prompt = `
-      Analyze the following Excel data and provide key insights, trends, and recommendations in a concise summary:
-      ${JSON.stringify(tableData)}
-    `;
+Analyze the following tabular data and provide:
+- Key insights
+- Trends or anomalies
+- Recommendations (if applicable)
+
+Data:
+${JSON.stringify(formattedData, null, 2)}
+`;
 
     const response = await axios.post(
       'https://openrouter.ai/api/v1/chat/completions',
@@ -20,6 +39,7 @@ router.post('/generate-insights', async (req, res) => {
       {
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          'Content-Type': 'application/json',
         },
       }
     );

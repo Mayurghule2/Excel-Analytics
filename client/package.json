@@ -17,6 +17,7 @@
     "date-fns": "^4.1.0",
     "feather": "^0.0.6",
     "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.523.0",
     "nodemailer": "^7.0.4",
