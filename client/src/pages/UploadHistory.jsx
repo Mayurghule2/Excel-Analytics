@@ -39,22 +39,19 @@ const UploadHistory = () => {
   useEffect(() => {
     let filtered = uploads;
 
-    // Status Filter
     if (statusFilter !== "all") {
       filtered = filtered.filter(upload => upload.status === statusFilter);
     }
 
-    // Search Filter
     if (searchQuery.trim() !== "") {
       filtered = filtered.filter(upload =>
         upload.file_name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    // File Size Filter
     if (fileSizeRange) {
       filtered = filtered.filter(upload => {
-        const sizeMB = upload.file_size / (1024 * 1024); // convert to MB
+        const sizeMB = upload.file_size / (1024 * 1024); 
         switch (fileSizeRange) {
           case "<1": return sizeMB < 1;
           case "1-10": return sizeMB >= 1 && sizeMB <= 10;
@@ -65,7 +62,6 @@ const UploadHistory = () => {
       });
     }
 
-    // Month Filter
     if (monthFilter) {
       filtered = filtered.filter(upload => {
         const uploadMonth = new Date(upload.upload_date).getMonth() + 1;
@@ -92,9 +88,7 @@ const UploadHistory = () => {
     <div className="p-8 min-h-screen bg-gradient-to-tr from-white to-blue-50 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-white transition">
       <h2 className="text-3xl font-bold mb-6 flex items-center gap-2">Upload History</h2>
 
-      {/* Filter UI */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-  {/* Search */}
   <div className="flex items-center gap-2 border rounded-lg px-3 py-2 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600">
     <FiSearch className="text-gray-500" />
     <input
@@ -106,7 +100,6 @@ const UploadHistory = () => {
     />
   </div>
 
-  {/* Status */}
   <div className="flex items-center gap-2 border rounded-lg px-3 py-2 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600">
     <FiFilter className="text-blue-500" />
     <select
@@ -121,7 +114,6 @@ const UploadHistory = () => {
     </select>
   </div>
 
-  {/* File Size Range */}
   <div className="flex items-center gap-2 border rounded-lg px-3 py-2 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600">
     <FaFileAlt className="text-green-500" />
     <select
@@ -137,7 +129,6 @@ const UploadHistory = () => {
     </select>
   </div>
 
-  {/* Month Filter */}
   <div className="flex items-center gap-2 border rounded-lg px-3 py-2 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600">
     <MdDateRange className="text-purple-500" />
     <select
@@ -171,7 +162,6 @@ const UploadHistory = () => {
   </button>
 </div>
 
-      {/* Upload Cards */}
       {loading ? (
         <p className="text-gray-500 dark:text-gray-300">Loading...</p>
       ) : filteredUploads.length === 0 ? (

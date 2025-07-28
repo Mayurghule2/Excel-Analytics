@@ -69,10 +69,10 @@ const ChartsSection = () => {
             
              <defs>
     <linearGradient id="multiCyanGradient" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.9} />  {/* cyan-500 */}
-      <stop offset="33%" stopColor="#06b6d4" stopOpacity={0.8} /> {/* cyan-400 */}
-      <stop offset="66%" stopColor="#67e8f9" stopOpacity={0.8} /> {/* cyan-300 */}
-      <stop offset="100%" stopColor="#67e8f9" stopOpacity={0.7} /> {/* cyan-200 */}
+      <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.9} />  
+      <stop offset="33%" stopColor="#06b6d4" stopOpacity={0.8} /> 
+      <stop offset="66%" stopColor="#67e8f9" stopOpacity={0.8} /> 
+      <stop offset="100%" stopColor="#67e8f9" stopOpacity={0.7} /> 
     </linearGradient>
   </defs>
             <CartesianGrid strokeDasharray="3 3" />
@@ -87,8 +87,8 @@ const ChartsSection = () => {
           <AreaChart data={data}>
   <defs>
     <linearGradient id="cyanGradientFill" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.8} /> {/* cyan-400 */}
-      <stop offset="100%" stopColor="#67e8f9" stopOpacity={0.6} /> {/* cyan-200 */}
+      <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.8} />
+      <stop offset="100%" stopColor="#67e8f9" stopOpacity={0.6} /> 
     </linearGradient>
   </defs>
   
@@ -99,7 +99,7 @@ const ChartsSection = () => {
   <Area
     type="monotone"
     dataKey="uploads"
-    stroke="#06b6d4" // cyan-500
+    stroke="#06b6d4" 
     fill="url(#cyanGradientFill)"
   />
 </AreaChart>

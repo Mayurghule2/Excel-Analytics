@@ -97,9 +97,9 @@ const Navbar = ({ onNavigate }) => {
               <button onClick={() => navigate("/user-dashboard")} className="font-semibold group relative">Dashboard
                 <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
               </button>
-              <button onClick={() => navigate("/analytics")} className="font-semibold group relative">Charts
+              {/* <button onClick={() => navigate("/analytics")} className="font-semibold group relative">Charts
                 <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
-              </button>
+              </button> */}
               <button onClick={() => navigate("/history")} className="font-semibold group relative">Upload History
                 <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-[#00ffff] transition-all duration-500 group-hover:w-full"></span>
               </button>
@@ -117,10 +117,7 @@ const Navbar = ({ onNavigate }) => {
                       <span className="text-sm font-semibold">{fullName}</span>
                     </div>
                     <button onClick={() => { navigate('/profile'); setShowDropdown(false); }} className="w-full text-left px-4 py-2 hover:bg-gray-100">Profile</button>
-                    {/* <button onClick={() => alert('Settings clicked')} className="w-full text-left px-4 py-2 hover:bg-gray-100">Settings</button>
-                    <button onClick={() => alert('Account clicked')} className="w-full text-left px-4 py-2 hover:bg-gray-100 text-blue-600">
-                      Account <span className="text-xs font-bold ml-1">NEW!</span>
-                    </button> */}
+                    
                     <button onClick={handleLogout} className="w-full text-left px-4 py-2 hover:bg-red-100 text-red-600">Log Out</button>
                   </div>
                 )}

@@ -12,7 +12,7 @@ router.post('/generate-insights', async (req, res) => {
   const { headers, rows } = tableData;
 
   try {
-    // Convert rows + headers into an array of objects for better readability in the prompt
+    
     const formattedData = rows.map(row =>
       headers.reduce((obj, header, idx) => {
         obj[header] = row[idx];

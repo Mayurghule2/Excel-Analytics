@@ -89,7 +89,7 @@ const ForgetPassword = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {/* Email Field */}
+          
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Registered Email <span className="text-red-500">*</span>
           </label>
@@ -115,7 +115,6 @@ const ForgetPassword = () => {
             <p className="text-green-600 text-sm">OTP sent to your email.</p>
           )}
 
-          {/* OTP Verification */}
           {otpSent && !otpVerified && (
             <>
               <label className="block text-sm font-medium text-gray-700 mb-1">

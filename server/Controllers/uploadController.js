@@ -51,7 +51,6 @@ exports.getChartData = async (req, res) => {
   }
 };
 
-// return the uploaded files
 exports.getAllUploads = async (req, res) => {
   try {
     const uploads = await UploadHistory.find().sort({ upload_date: -1 });
@@ -73,7 +72,7 @@ exports.getUploadById = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server Error' });
   }
 };
-// delete the uploaded file
+
 exports.deleteUploadById = async (req, res) => {
   const id = req.params.id;
    console.log('Received ID to delete:', id);

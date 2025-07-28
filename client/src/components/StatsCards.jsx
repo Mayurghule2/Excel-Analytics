@@ -10,7 +10,6 @@ export default function StatsCards() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        // const token = localStorage.getItem('authToken');
         const res =  await fetchDashboardStats();
         console.log("Dashboard stats fetched successfully:", res.data);
         setStats(res.data);

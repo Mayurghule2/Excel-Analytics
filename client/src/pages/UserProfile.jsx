@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import Select from 'react-select';
 import { Country, State } from 'country-state-city';
 import { FaUser } from 'react-icons/fa';
-
+import { useNavigate } from "react-router-dom";
 
 
 const countries = Country.getAllCountries().map((country) => ({
@@ -15,12 +15,12 @@ const countries = Country.getAllCountries().map((country) => ({
 
 const UserProfile = () => {
   const token = localStorage.getItem('authToken');
-
-let userId = null;
-if (token) {
-  const decoded = jwtDecode(token);
-  userId = decoded?.id; 
-}
+  const navigate = useNavigate();
+  let userId = null;
+  if (token) {
+    const decoded = jwtDecode(token);
+    userId = decoded?.id;
+  }
   if (!userId) return;
   const [user, setUser] = useState(null);
   const [states, setStates] = useState([]);
@@ -77,7 +77,7 @@ if (token) {
     try {
       await putUserProfile(userId, formData);
       alert("User updated successfully");
-      fetchUser(); 
+      fetchUser();
     } catch (error) {
       console.error("Update error:", error);
       alert("Failed to update user.");
@@ -89,9 +89,9 @@ if (token) {
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded shadow-lg mt-10 mb-10">
       <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-  <FaUser className="text-blue-600" />
-  User Profile
-</h2>
+        <FaUser className="text-blue-600" />
+        User Profile
+      </h2>
 
       <form onSubmit={handleUpdate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {["firstName", "lastName", "username", "email", "city", "pincode"].map((field) => (
@@ -131,7 +131,7 @@ if (token) {
 
           <div className="col-span-full">
             <button
-              type="submit"
+              onClick={() => navigate("/user-dashboard")}
               className="text-[#030d46] border border-[#030d46] px-6 py-2 rounded hover:bg-blue-200 font-semibold"
             >
               Back to Dashboard

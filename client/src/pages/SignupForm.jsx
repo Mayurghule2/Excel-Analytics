@@ -111,7 +111,6 @@ const SignupForm = () => {
     >
       <h3 className="text-xl font-semibold mb-4">Signup</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* First Name */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             First Name <span className="text-red-500">*</span>
@@ -126,7 +125,6 @@ const SignupForm = () => {
           />
         </div>
 
-        {/* Last Name */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Last Name <span className="text-red-500">*</span>
@@ -141,7 +139,6 @@ const SignupForm = () => {
           />
         </div>
 
-        {/* Username */}
         <div className="col-span-1 md:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Username <span className="text-red-500">*</span>
@@ -161,7 +158,6 @@ const SignupForm = () => {
           </div>
         </div>
 
-        {/* Email */}
         <div className="col-span-1 md:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Email <span className="text-red-500">*</span>
@@ -177,7 +173,6 @@ const SignupForm = () => {
           />
         </div>
 
-        {/* Password */}
         <div className="col-span-1 md:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Password <span className="text-red-500">*</span>
@@ -194,7 +189,6 @@ const SignupForm = () => {
           />
         </div>
 
-        {/* Country */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Country <span className="text-red-500">*</span>
@@ -211,7 +205,6 @@ const SignupForm = () => {
           </select>
         </div>
 
-        {/* State */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             State <span className="text-red-500">*</span>
@@ -232,7 +225,6 @@ const SignupForm = () => {
           </select>
         </div>
 
-        {/*city*/}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             City<span className="text-red-500">*</span>
@@ -247,7 +239,6 @@ const SignupForm = () => {
           />
         </div>
 
-        {/* Pincode */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Pincode <span className="text-red-500">*</span>
@@ -255,9 +246,9 @@ const SignupForm = () => {
           <input
             type="text"
             name="pincode"
-            inputMode="numeric" // Helps mobile keyboards show numbers
-            pattern="[0-9]*" // Ensures only digits
-            maxLength={6} // Optional: limit to 6 digits for Indian pincodes
+            inputMode="numeric" 
+            pattern="[0-9]*" 
+            maxLength={6} 
             className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={formData.pincode}
             onChange={(e) => {
@@ -271,7 +262,6 @@ const SignupForm = () => {
         </div>
       </div>
 
-      {/* Submit Button */}
       <button
         type="submit"
         className="mt-6 w-full bg-gradient-to-r from-[#030d46] to-[#06eaea] text-white py-2 px-4  hover:opacity-50 transition duration-300 rounded-2xl"

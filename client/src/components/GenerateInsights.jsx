@@ -32,7 +32,7 @@ const GenerateInsights = ({ headers, rows }) => {
     doc.setFontSize(18);
     doc.text(title, 10, 20);
 
-    const lines = doc.splitTextToSize(insights, 180); // wrap text
+    const lines = doc.splitTextToSize(insights, 180); 
     doc.setFontSize(12);
     doc.text(lines, 10, 30);
 

@@ -31,7 +31,7 @@ exports.getUserDashboardData = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
   try {
-    const { id } = req.params; // 👈 make sure this exists
+    const { id } = req.params; 
     if (!id) {
       return res.status(400).json({ message: 'User ID is required' });
     }

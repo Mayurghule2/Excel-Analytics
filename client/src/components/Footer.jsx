@@ -13,7 +13,7 @@ export default function Footer() {
           <p className="text-sm text-blue-300 mt-1">Transforming Excel Data Into Actionable Insights</p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-md">
+        {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-md">
           
           <div className="space-y-1">
             <a href="/charts" className="block font-semibold hover:text-blue-300">Charts</a>
@@ -33,7 +33,7 @@ export default function Footer() {
             <a href="/docs" className="block font-semibold hover:text-blue-300">Documentation</a>
             <a href="/api" className="block hover:text-blue-300">API Reference</a>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="container mx-auto mt-6 flex flex-col items-center gap-4">

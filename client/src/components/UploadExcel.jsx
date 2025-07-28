@@ -38,7 +38,7 @@ const UploadExcel = ({ darkMode }) => {
   const [sourceData, setSourceData] = useState([8000, 10000, 9000, 12000, 8500, 11500, 9500]);
   const [excelData, setExcelData] = useState([]);
 
-//   const handleAnalyze = async () => {
+
 //   if (!selectedFile) {
 //     alert("Please upload a file first.");
 //     return;
@@ -75,7 +75,7 @@ const UploadExcel = ({ darkMode }) => {
   const handleExcelUpload = (e) => {
   const file = e.target.files[0];
   if (!file) return;
-  setSelectedFile(file); // ✅ store file to send later
+  setSelectedFile(file); 
 
   const reader = new FileReader();
   reader.onload = (evt) => {
@@ -114,7 +114,7 @@ const handleAnalyze = async () => {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`
-        // ❌ Don't set Content-Type manually, browser will handle it
+        
       },
       body: formData
     });

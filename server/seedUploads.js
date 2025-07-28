@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
-const UploadHistory = require('./models/UploadHistory'); // adjust path as needed
+const UploadHistory = require('./models/UploadHistory'); 
 
- // Load environment variables from .env
 
-// 🔁 Replace with a real user ID from your database
 const userId = '68666424b230002a5575e94b';
 
 const sampleData = [

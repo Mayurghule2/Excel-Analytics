@@ -85,7 +85,6 @@ const UserDashboard = () => {
           </ResponsiveContainer>
         </div>
 
-        {/* Bar Chart */}
         <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all">
           <h4 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
   <FiTrendingUp className="text-green-600" />
@@ -109,7 +108,6 @@ const UserDashboard = () => {
         </div>
       </div>
 
-      {/* Recent Uploads */}
       <div className="mt-12 bg-white p-6 rounded-2xl shadow-md">
        <h4 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
   <FiRecent className="text-yellow-600" />
