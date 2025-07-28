@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api', 
+  baseURL: 'https://excel-analytics-backend-y6sg.onrender.com/api', 
 });
 
 api.interceptors.request.use((config) => {
@@ -58,7 +58,7 @@ export const fetchChartData = (type) =>
 
 export const sendContactMessage = async (formData) => {
   try {
-    const res = await axios.post('http://localhost:5000/api/contact', formData, {
+    const res = await axios.post('https://excel-analytics-backend-y6sg.onrender.com/api/contact', formData, {
       headers: {
         'Content-Type': 'application/json',
       },
