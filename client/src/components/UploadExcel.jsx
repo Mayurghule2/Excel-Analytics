@@ -16,6 +16,7 @@ import {
 import * as XLSX from 'xlsx';
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { TbAnalyzeFilled } from "react-icons/tb";
+import { uploadFile } from '../services/api';
 
 ChartJS.register(
   CategoryScale,
@@ -108,20 +109,13 @@ const handleAnalyze = async () => {
   formData.append('file', selectedFile);
 
   try {
-    const token = localStorage.getItem('authToken');
+    
 
-    const response = await fetch('/api/uploads', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`
-        
-      },
-      body: formData
-    });
+    const response = await uploadFile(formData);
 
-    const result = await response.json();
+    const result = response.data;
 
-    if (response.ok) {
+    if (response.status >= 200 && response.status < 300) {
       alert('Upload and analysis successful.');
   navigate(`/charts/${result.uploadId}`);
     } else {
