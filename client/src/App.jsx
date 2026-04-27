@@ -34,7 +34,7 @@ function App() {
   }, [location]);
   return (
     <> 
-      {userRole !== 'admin' && <Navbar   />}
+      {userRole !== 'admin' && <Navbar/>}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/contact" element={<ContactUs />} />
