@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
-import TopBar from '../components/Topbar';
+import TopBar from '../components/TopBar';
 import StatsCards from '../components/StatsCards';
 import ChartsSection from '../components/ChartsSection';
 import UploadStatistics from '../components/UploadStatistics';
